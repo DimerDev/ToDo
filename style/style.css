@@ -1,0 +1,35 @@
+body {
+   background: rgb(194, 222, 245);
+}
+
+.container-md {
+   max-width: 480px;
+   color: white;
+
+}
+
+.fa-plus {
+   color: white;
+}
+
+.header {
+   min-height: 50px;
+   text-align: center;
+   background: rgb(235, 138, 73);
+}
+
+.bodyTask {
+   background: rgb(253, 253, 252);
+   width: 100%;
+   padding: 8px 8px;
+}
+
+.nav-link {
+   color: gray;
+   font-size: larger;
+}
+
+.arrow {
+   padding: auto;
+   color: rgb(218, 117, 70);
+}
