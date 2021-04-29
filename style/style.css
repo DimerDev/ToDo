@@ -4,7 +4,9 @@ body {
 
 .container-md {
    max-width: 480px;
+   max-height: 800px;
    color: white;
+
 
 }
 
@@ -22,6 +24,7 @@ body {
    background: rgb(253, 253, 252);
    width: 100%;
    padding: 8px 8px;
+
 }
 
 .nav-link {
@@ -32,4 +35,9 @@ body {
 .arrow {
    padding: auto;
    color: rgb(218, 117, 70);
+}
+
+.task {
+   background: rgb(225 225 225);
+   color: #495057 !important;
 }
