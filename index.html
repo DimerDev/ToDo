@@ -25,10 +25,10 @@
          <div class="col-sm-2 m-auto dropdown dropright">
             <i class="fas fa-plus fa-2x " data-toggle="dropdown"></i>
             <div class="dropdown-menu">
-               <i class="fas fa-plus-circle fa-2x dropdown-item">Add</i>
-               <i class="fas fa-edit fa-2x dropdown-item">Edit</i>
-               <i class="fas fa-check-circle fa-2x dropdown-item">Done</i>
-               <i class="fas fa-trash fa-2x dropdown-item">Delete</i>
+               <i class="fas fa-plus-circle fa-1x dropdown-item" data-toggle="modal" data-target="#myAdd">Add</i>
+               <i class="fas fa-edit fa-1x dropdown-item" data-toggle="modal" data-target="#myEdit">Edit</i>
+               <i class="fas fa-check-circle fa-1x dropdown-item">Done</i>
+               <i class="fas fa-trash fa-1x dropdown-item">Delete</i>
             </div>
          </div>
       </div>
@@ -52,8 +52,8 @@
          <div class="col-sm-1">
             <i class="fas fa-chevron-right fa-2x arrow float-left py-2"></i>
          </div>
-         <div class="taskBorder container py-0 px-0 mx-2 my-3">
-            <div class="task container my-2 mx-0 px-0 py-2 row">
+         <div class="taskBorder container  py-0 px-0 mx-2 my-3">
+            <!-- <div class="task container my-2 mx-0 px-0 py-2 row">
                <div class="when container col-sm-3 m-0 px-0">
                   <div class="date text-center ">29.04.21 </div>
                   <div class="time text-center">10:00 </div>
@@ -61,10 +61,84 @@
                <div class="taskText col-sm-9  ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur,
                   quae.
                   Laboriosam tempore exercitationem magni soluta deleniti animi aliquam vel laudantium?</div>
-            </div>
+            </div> -->
          </div>
       </div>
    </div>
+
+   <!-- The Modal  add  -->
+   <div class="modal" id="myAdd">
+      <div class="modal-dialog">
+         <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+               <h4 class="modal-title mx-auto">New Task</h4>
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+
+               <div class="form-group">
+                  <label for="time">Time:</label>
+                  <input type="time" id="time">
+                  <label for="date">Date:</label>
+                  <input type="date" id="date">
+                  <div class="form-group">
+                     <label for="textTask">Text Task:</label>
+                     <textarea class="form-control" rows="3" id="textTask"></textarea>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+               <button id="addNewTask" type="button" class="btn btn-success" data-dismiss="modal">Add</button>
+               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+         </div>
+      </div>
+   </div>
+   <!-- The Modal add  -->
+
+   <!-- The Modal  edit  -->
+   <div class="modal" id="myEdit">
+      <div class="modal-dialog">
+         <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+               <h4 class="modal-title mx-auto">New Task</h4>
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+
+               <div class="form-group">
+                  <label for="time">Time:</label>
+                  <input type="time" id="time">
+                  <label for="date">Date:</label>
+                  <input type="date" id="date">
+                  <div class="form-group">
+                     <label for="textTask">Text Task:</label>
+                     <textarea class="form-control" rows="3" id="textTask"></textarea>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+               <button type="button" class="btn btn-success" data-dismiss="modal">Add</button>
+               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+         </div>
+      </div>
+   </div>
+   <!-- The Modal edit  -->
 
    <script src="./class/Task.js"></script>
    <script src="./script/script.js"></script>

@@ -41,3 +41,8 @@ body {
    background: rgb(225 225 225);
    color: #495057 !important;
 }
+
+.select {
+   border: 1px solid #dee2e6 !important;
+   border-color: #007bff !important;
+}

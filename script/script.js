@@ -1,8 +1,11 @@
+document.querySelector('#addNewTask').onclick = addNewTask;
+
+
 function getElem(e) {
 
    if (e.target.classList.contains('arrow') || e.target.classList.contains('nav-link')) return changePeriod(e);
-   else return false;
-
+   // else return false;
+   // else console.log(this);
 }
 
 
@@ -45,7 +48,29 @@ function changePeriod(elem) {
       period[count].classList.add('active');
    }
 }
+// set active task 
+function Select(e) {
+   let allTasks = document.querySelectorAll('.task');
+   for (let i = 0; i < allTasks.length; i++) {
+      if (allTasks[i].classList.contains('select')) allTasks[i].classList.remove('select');
+   }
+   this.classList.add('select');
+}
 
+function addNewTask() {
+   const time = document.querySelector('#time').value;
+   const date = document.querySelector('#date').value;
+   const textTask = document.querySelector('#textTask').value;
+
+   const newTask = new Task(date, time, textTask);
+   newTask.render();
+
+}
 
 
 document.querySelector('.bodyTask').addEventListener('click', getElem);
+let allTasks = document.querySelectorAll('.task');
+console.log(allTasks);
+for (let i = 0; i < allTasks.length; i++) {
+   allTasks[i].onclick = Select;
+}
