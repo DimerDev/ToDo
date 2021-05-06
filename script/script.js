@@ -1,4 +1,12 @@
-document.querySelector('#addNewTask').onclick = addNewTask;
+const list = new List();
+if (localStorage.getItem('list')) {
+   const items = JSON.parse(localStorage.getItem('list'));
+   list.accept(items)
+   list.render();
+}
+
+
+
 
 
 function getElem(e) {
@@ -10,7 +18,7 @@ function getElem(e) {
 
 
 function changePeriod(elem) {
-
+   elem.preventDefault();
    let period = document.querySelectorAll('.nav-link');
    let count = 0;
    if (elem.target.classList.contains('nav-link')) {
@@ -57,20 +65,31 @@ function Select(e) {
    this.classList.add('select');
 }
 
-function addNewTask() {
+function addTask(event) {
+   event.preventDefault();
    const time = document.querySelector('#time').value;
-   const date = document.querySelector('#date').value;
+   const date = document.querySelector('#date').value.split('-').reverse().join('.');
    const textTask = document.querySelector('#textTask').value;
 
-   const newTask = new Task(date, time, textTask);
-   newTask.render();
-
+   const nTask = new Task(date, time, textTask);
+   list.accept(nTask);
+   list.render();
 }
 
-
+document.querySelector('#addTask').onclick = addTask;
 document.querySelector('.bodyTask').addEventListener('click', getElem);
-let allTasks = document.querySelectorAll('.task');
-console.log(allTasks);
-for (let i = 0; i < allTasks.length; i++) {
-   allTasks[i].onclick = Select;
-}
+document.querySelector('.taskBorder').addEventListener('click', () => {
+   let allTasks = document.querySelectorAll('.task');
+   for (let i = 0; i < allTasks.length; i++) {
+      allTasks[i].onclick = Select;
+   }
+});
+
+
+let b1 = new Task('05.06.2021', '10:00', 'Test b1');
+
+let b2 = new Task('06.05.2021', '12:00', 'Test b2');
+
+
+// list.accept(b1);
+// list.accept(b2);

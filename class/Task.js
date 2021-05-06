@@ -1,15 +1,24 @@
 class Task {
-   constructor(date, time, taskText) {
-      let outDate = date.split('-').reverse().join('.');
 
-      this._date = outDate;
-      this._time = time;
-      this._taskText = taskText;
-      this._timeLabel = '';
-      this._done = 'false'; // if true - add class="bg-success"
+
+   constructor(date, time, taskText) {
+
+      let timeStamp = new Date();
+      timeStamp = Date.parse(timeStamp);
+
+      this.date = date;
+      this.time = time;
+      this.taskText = taskText;
+      this.timeStamp = timeStamp;
+      this.done = 'false'; // if true - add class="bg-success"
+
    }
-   render() {
-      const taskBorder = document.querySelector('.taskBorder');
+
+   /*away() {
+       let timeStamp = new Date();
+       timeStamp = Date.parse(timeStamp);
+       this._timeStamp = timeStamp;
+
       const task = document.createElement('div');
       const when = document.createElement('div');
       const date = document.createElement('div');
@@ -27,9 +36,8 @@ class Task {
       when.append(time);
       task.append(when);
       task.append(taskText);
-
-      taskBorder.append(task);
-      // console.log(task);
-   }
-
+       task.setAttribute('data', this._timeStamp);
+   return this;
+   // console.log(task);
+} */
 }
