@@ -1,9 +1,6 @@
 class List {
-   constructor(items = {}) {
-
-      this.count = 0;
-      this.list = items;
-
+   constructor() {
+      this.list = {};
    }
    render() {
       for (let key in this.list) {
@@ -29,9 +26,13 @@ class List {
       }
    }
 
-   accept(items) {
-      console.log(items);
+   accept(item) {
+      this.list[item.timeStamp] = item;
       localStorage.setItem('list', JSON.stringify(this.list))
+   }
+
+   getList(item) {
+      this.list = item;
    }
 
    today() {}

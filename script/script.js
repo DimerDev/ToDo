@@ -1,9 +1,11 @@
-const list = new List();
+const toDoList = new List();
 if (localStorage.getItem('list')) {
    const items = JSON.parse(localStorage.getItem('list'));
-   list.accept(items)
-   list.render();
+   toDoList.getList(items);
+   document.querySelector('.taskBorder').innerHTML = '';
+   toDoList.render();
 }
+console.log(toDoList.list);
 
 
 
@@ -72,8 +74,9 @@ function addTask(event) {
    const textTask = document.querySelector('#textTask').value;
 
    const nTask = new Task(date, time, textTask);
-   list.accept(nTask);
-   list.render();
+   toDoList.accept(nTask);
+   document.querySelector('.taskBorder').innerHTML = '';
+   toDoList.render();
 }
 
 document.querySelector('#addTask').onclick = addTask;
