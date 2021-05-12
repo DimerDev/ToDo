@@ -1,26 +1,24 @@
 const toDoList = new List();
+
 if (localStorage.getItem('list')) {
    const items = JSON.parse(localStorage.getItem('list'));
-   toDoList.getList(items);
+   toDoList.saveList(items);
    document.querySelector('.taskBorder').innerHTML = '';
-   toDoList.render();
+   toDoList.render(toDoList.list);
 }
-console.log(toDoList.list);
-
-
-
 
 
 function getElem(e) {
-
    if (e.target.classList.contains('arrow') || e.target.classList.contains('nav-link')) return changePeriod(e);
-   // else return false;
-   // else console.log(this);
 }
+
+
+
 
 
 function changePeriod(elem) {
    elem.preventDefault();
+   let activeInterval = {};
    let period = document.querySelectorAll('.nav-link');
    let count = 0;
    if (elem.target.classList.contains('nav-link')) {
@@ -28,8 +26,10 @@ function changePeriod(elem) {
          if (period[i].classList.contains('active')) {
             period[i].classList.remove('active');
             elem.target.classList.add('active');
+            activeInterval = elem.target;
          }
       }
+
    }
 
    if (elem.target.classList.contains('fa-chevron-right')) { //move forward
@@ -43,6 +43,7 @@ function changePeriod(elem) {
       count = ++count;
       if (count == period.length) count = 0;
       period[count].classList.add('active');
+      activeInterval = period[count];
    }
 
    if (elem.target.classList.contains('fa-chevron-left')) { //move back
@@ -56,8 +57,62 @@ function changePeriod(elem) {
       count = --count;
       if (count == -1) count = period.length - 1;
       period[count].classList.add('active');
+      activeInterval = period[count];
+   }
+   if (activeInterval.classList.contains('today')) {
+      filter('today');
+   }
+   if (activeInterval.classList.contains('week')) {
+      filter('week');
+   }
+   if (activeInterval.classList.contains('month')) {
+      filter('month');
+   }
+   if (activeInterval.classList.contains('all')) {
+      document.querySelector('.taskBorder').innerHTML = '';
+      toDoList.render(toDoList.list);
    }
 }
+
+function filterList(start, end) {
+   let elems = {};
+   let list = JSON.parse(localStorage.getItem('list'));
+
+   for (let key in list) {
+      let itemTime = new Date(list[key].date);
+      if (+itemTime >= start && +itemTime < end) {
+         elems[list[key].timeStamp] = list[key];
+      }
+   }
+   document.querySelector('.taskBorder').innerHTML = '';
+   toDoList.render(elems);
+}
+
+function filter(sort) {
+
+   if (sort == 'today') {
+      let date = new Date();
+      let start = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      let end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 1, start.getHours(), start.getMinutes(), start.getSeconds() - 1);
+      filterList(start, end);
+   }
+
+   if (sort == 'week') {
+      let date = new Date();
+      let diff = date.getDate() - date.getDay() + (date.getDay() == 0 ? -6 : 1); ///
+      let weekStart = new Date(date.setDate(diff)); ///
+      let start = new Date(weekStart.getFullYear(), weekStart.getMonth(), weekStart.getDate()); /// get every monday
+      let end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 7, start.getHours(), start.getMinutes(), start.getSeconds() - 1);
+      filterList(start, end);
+   }
+   if (sort == 'month') {
+      let date = new Date();
+      let start = new Date(date.getFullYear(), date.getMonth());
+      let end = new Date(date.getFullYear(), date.getMonth() + 1, 0, 23, 59, 59);
+      filterList(start, end);
+   }
+}
+
 // set active task 
 function Select(e) {
    let allTasks = document.querySelectorAll('.task');
@@ -70,13 +125,13 @@ function Select(e) {
 function addTask(event) {
    event.preventDefault();
    const time = document.querySelector('#time').value;
-   const date = document.querySelector('#date').value.split('-').reverse().join('.');
+   const date = document.querySelector('#date').value;
    const textTask = document.querySelector('#textTask').value;
 
    const nTask = new Task(date, time, textTask);
    toDoList.accept(nTask);
    document.querySelector('.taskBorder').innerHTML = '';
-   toDoList.render();
+   toDoList.render(toDoList.list);
 }
 
 document.querySelector('#addTask').onclick = addTask;
@@ -87,12 +142,3 @@ document.querySelector('.taskBorder').addEventListener('click', () => {
       allTasks[i].onclick = Select;
    }
 });
-
-
-let b1 = new Task('05.06.2021', '10:00', 'Test b1');
-
-let b2 = new Task('06.05.2021', '12:00', 'Test b2');
-
-
-// list.accept(b1);
-// list.accept(b2);

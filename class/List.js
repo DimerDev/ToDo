@@ -2,8 +2,8 @@ class List {
    constructor() {
       this.list = {};
    }
-   render() {
-      for (let key in this.list) {
+   render(list) {
+      for (let key in list) {
          const task = document.createElement('div');
          const when = document.createElement('div');
          const date = document.createElement('div');
@@ -18,10 +18,10 @@ class List {
          when.append(time);
          task.append(when);
          task.append(taskText);
-         task.setAttribute('data', this.list[key].timeStamp);
-         date.textContent = this.list[key].date;
-         time.textContent = this.list[key].time;
-         taskText.textContent = this.list[key].taskText;
+         task.setAttribute('data', list[key].timeStamp);
+         date.textContent = list[key].date.split('-').reverse().join('.');
+         time.textContent = list[key].time;
+         taskText.textContent = list[key].taskText;
          document.querySelector('.taskBorder').append(task);
       }
    }
@@ -31,13 +31,7 @@ class List {
       localStorage.setItem('list', JSON.stringify(this.list))
    }
 
-   getList(item) {
+   saveList(item) {
       this.list = item;
    }
-
-   today() {}
-   week() {}
-   month() {}
-
-
 }
