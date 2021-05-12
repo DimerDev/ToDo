@@ -10,6 +10,7 @@ class List {
          const time = document.createElement('div');
          const taskText = document.createElement('div');
          task.classList.add('task', 'container', 'my-2', 'mx-0', 'px-0', 'py-2', 'row');
+         if (list[key].done == true) task.classList.add('bg-success');
          when.classList.add('when', 'container', 'col-sm-3', 'm-0', 'px-0');
          date.classList.add('date', 'text-center');
          time.classList.add('time', 'text-center');

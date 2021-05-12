@@ -134,7 +134,26 @@ function addTask(event) {
    toDoList.render(toDoList.list);
 }
 
+function done() {
+   let task;
+   let list = JSON.parse(localStorage.getItem('list'));
+   let items = document.querySelector('.taskBorder').children;
+   for (let i = 0; i < items.length; i++) {
+      if (items[i].classList.contains('select')) task = items[i].getAttribute('data');
+   }
+
+   for (let key in list) {
+      if (list[key].timeStamp == +task) {
+         list[key].done = true;
+      }
+      toDoList.accept(list[key]);
+   }
+   document.querySelector('.taskBorder').innerHTML = '';
+   toDoList.render(toDoList.list);
+}
+
 document.querySelector('#addTask').onclick = addTask;
+document.querySelector('#done').onclick = done;
 document.querySelector('.bodyTask').addEventListener('click', getElem);
 document.querySelector('.taskBorder').addEventListener('click', () => {
    let allTasks = document.querySelectorAll('.task');
