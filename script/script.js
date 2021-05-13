@@ -13,9 +13,6 @@ function getElem(e) {
 }
 
 
-
-
-
 function changePeriod(elem) {
    elem.preventDefault();
    let activeInterval = {};
@@ -122,16 +119,41 @@ function Select(e) {
    this.classList.add('select');
 }
 
-function addTask(event) {
+function addTask(event) { //add new task
    event.preventDefault();
    const time = document.querySelector('#time').value;
    const date = document.querySelector('#date').value;
    const textTask = document.querySelector('#textTask').value;
-
    const nTask = new Task(date, time, textTask);
    toDoList.accept(nTask);
    document.querySelector('.taskBorder').innerHTML = '';
    toDoList.render(toDoList.list);
+}
+
+function edit() { //edit task
+   let list = JSON.parse(localStorage.getItem('list'));
+   let items = document.querySelector('.taskBorder').children;
+   for (let i = 0; i < items.length; i++) {
+      if (items[i].classList.contains('select')) {
+         let task = items[i].getAttribute('data');
+         for (let key in list) {
+            if (list[key].timeStamp == +task) {
+
+               document.querySelector('#etime').value = list[key].time;
+               document.querySelector('#edate').value = list[key].date.split('.').reverse().join('-');
+               document.querySelector('#etextTask').textContent = list[key].taskText;
+               document.querySelector('#editTask').onclick = (e) => {
+                  list[key].time = document.querySelector('#etime').value;
+                  list[key].date = document.querySelector('#edate').value;
+                  list[key].taskText = document.querySelector('#etextTask').value;
+                  toDoList.saveList(list);
+                  document.querySelector('.taskBorder').innerHTML = '';
+                  toDoList.render(toDoList.list);
+               }
+            }
+         }
+      }
+   }
 }
 
 function done() {
@@ -153,6 +175,7 @@ function done() {
 }
 
 document.querySelector('#addTask').onclick = addTask;
+document.querySelector('#edit').onclick = edit;
 document.querySelector('#done').onclick = done;
 document.querySelector('.bodyTask').addEventListener('click', getElem);
 document.querySelector('.taskBorder').addEventListener('click', () => {

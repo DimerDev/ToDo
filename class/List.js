@@ -29,10 +29,12 @@ class List {
 
    accept(item) {
       this.list[item.timeStamp] = item;
-      localStorage.setItem('list', JSON.stringify(this.list))
+      localStorage.setItem('list', JSON.stringify(this.list));
    }
 
    saveList(item) {
       this.list = item;
+      localStorage.clear();
+      localStorage.setItem('list', JSON.stringify(this.list));
    }
 }

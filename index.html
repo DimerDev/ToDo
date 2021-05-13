@@ -26,7 +26,7 @@
             <i class="fas fa-plus fa-2x " data-toggle="dropdown"></i>
             <div class="dropdown-menu">
                <i class="fas fa-plus-circle fa-1x dropdown-item" data-toggle="modal" data-target="#myAdd">Add</i>
-               <i class="fas fa-edit fa-1x dropdown-item" data-toggle="modal" data-target="#myEdit">Edit</i>
+               <i id="edit" class="fas fa-edit fa-1x dropdown-item" data-toggle="modal" data-target="#myEdit">Edit</i>
                <i id="done" class="fas fa-check-circle fa-1x dropdown-item">Done</i>
                <i class="fas fa-trash fa-1x dropdown-item">Delete</i>
             </div>
@@ -97,7 +97,7 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-               <button id="addTask" type="button" class="btn btn-success" data-dismiss="modal">Add</button>
+               <button id="addTask" type="button" class="addTask btn btn-success" data-dismiss="modal">Add</button>
                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
 
@@ -122,12 +122,12 @@
 
                <div class="form-group">
                   <label for="time">Time:</label>
-                  <input type="time" id="time">
+                  <input type="time" id="etime">
                   <label for="date">Date:</label>
-                  <input type="date" id="date">
+                  <input type="date" id="edate">
                   <div class="form-group">
                      <label for="textTask">Text Task:</label>
-                     <textarea class="form-control" rows="3" id="textTask"></textarea>
+                     <textarea class="form-control" rows="3" id="etextTask"></textarea>
                   </div>
                </div>
             </div>
