@@ -1,3 +1,10 @@
+import {
+   List
+} from './models/List.js';
+import {
+   Task
+} from './models/Task.js';
+
 const toDoList = new List();
 
 if (localStorage.getItem('list')) {
@@ -11,7 +18,6 @@ if (localStorage.getItem('list')) {
 function getElem(e) {
    if (e.target.classList.contains('arrow') || e.target.classList.contains('nav-link')) return changePeriod(e);
 }
-
 
 function changePeriod(elem) {
    elem.preventDefault();
@@ -102,6 +108,7 @@ function filter(sort) {
       let end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 7, start.getHours(), start.getMinutes(), start.getSeconds() - 1);
       filterList(start, end);
    }
+
    if (sort == 'month') {
       let date = new Date();
       let start = new Date(date.getFullYear(), date.getMonth());

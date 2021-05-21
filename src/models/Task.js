@@ -1,6 +1,4 @@
-class Task {
-
-
+export class Task {
    constructor(date, time, taskText) {
 
       let timeStamp = new Date();
